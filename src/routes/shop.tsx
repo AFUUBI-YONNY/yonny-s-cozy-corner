@@ -118,7 +118,7 @@ function Shop() {
 
           {subcats.length > 0 && (
             <FilterGroup title="Subcategory">
-              {subcats.map((s) => (
+              {subcats.map((s: string) => (
                 <button
                   key={s}
                   type="button"
@@ -132,7 +132,7 @@ function Shop() {
           )}
 
           <FilterGroup title="Price">
-            {["Under GH₵ 150", "GH₵ 150 – 300", "GH₵ 300 – 500", "GH₵ 500+"].map((p) => (
+            {["Under GH₵ 150", "GH₵ 150 – 300", "GH₵ 300 – 500", "GH₵ 500+"].map((p: string) => (
               <label key={p} className="flex items-center gap-2 py-1.5 text-sm text-muted-foreground">
                 <input type="checkbox" className="h-3.5 w-3.5 accent-foreground" />
                 {p}
@@ -142,7 +142,7 @@ function Shop() {
 
           <FilterGroup title="Size">
             <div className="flex flex-wrap gap-2">
-              {["S", "M", "L", "XL", "Queen", "King"].map((s) => (
+              {["S", "M", "L", "XL", "Queen", "King"].map((s: string) => (
                 <button
                   key={s}
                   type="button"

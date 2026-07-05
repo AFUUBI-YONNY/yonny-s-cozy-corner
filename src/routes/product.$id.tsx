@@ -81,7 +81,7 @@ function ProductPage() {
             />
           </div>
           <div className="mt-4 grid grid-cols-4 gap-3">
-            {product.images.map((img, i) => (
+            {product.images.map((img: string, i: number) => (
               <button
                 key={i}
                 type="button"
@@ -132,7 +132,7 @@ function ProductPage() {
           <div className="mt-8">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wider">Color · {color}</p>
             <div className="flex flex-wrap gap-2">
-              {product.colors.map((c) => (
+              {product.colors.map((c: string) => (
                 <button
                   key={c}
                   type="button"
@@ -154,7 +154,7 @@ function ProductPage() {
           <div className="mt-6">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wider">Size · {size}</p>
             <div className="flex flex-wrap gap-2">
-              {product.sizes.map((s) => (
+              {product.sizes.map((s: string) => (
                 <button
                   key={s}
                   type="button"
