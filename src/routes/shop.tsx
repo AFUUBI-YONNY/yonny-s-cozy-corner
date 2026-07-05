@@ -12,6 +12,8 @@ const shopSearchSchema = z.object({
   sort: fallback(z.enum(["new", "price-asc", "price-desc", "popular"]), "new").default("new"),
 });
 
+type ShopSearch = z.infer<typeof shopSearchSchema>;
+
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
@@ -79,7 +81,7 @@ function Shop() {
           <Search size={16} className="text-muted-foreground" strokeWidth={1.75} />
           <input
             value={q}
-            onChange={(e) => navigate({ search: (s) => ({ ...s, q: e.target.value }) })}
+            onChange={(e) => navigate({ search: (s: ShopSearch) => ({ ...s, q: e.target.value }) })}
             placeholder="Search slippers, sheets, blankets…"
             className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
           />
@@ -95,7 +97,7 @@ function Shop() {
           <select
             value={sort}
             onChange={(e) =>
-              navigate({ search: (s) => ({ ...s, sort: e.target.value as never }) })
+              navigate({ search: (s: ShopSearch) => ({ ...s, sort: e.target.value as ShopSearch["sort"] }) })
             }
             className="rounded-full border border-hairline bg-background px-4 py-2.5 text-sm outline-none"
           >
@@ -122,7 +124,7 @@ function Shop() {
                 <button
                   key={s}
                   type="button"
-                  onClick={() => navigate({ search: (v) => ({ ...v, q: s }) })}
+                  onClick={() => navigate({ search: (v: ShopSearch) => ({ ...v, q: s }) })}
                   className="block py-1.5 text-left text-sm text-muted-foreground transition hover:text-foreground"
                 >
                   {s}
