@@ -2,10 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Truck, HeadphonesIcon, BadgeCheck, Sparkles } from "lucide-react";
 import hero from "@/assets/cap1.jpeg";
 import catSlippers from "@/assets/cap5.jpeg";
-import catBedding from "@/assets/cap6.jpeg";
+import catCaps from "@/assets/cap6.jpeg";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
-import { StarRating } from "@/components/star-rating";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,12 +13,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Shop premium slippers and quality bedding at affordable prices. Free delivery on qualifying orders.",
+          "Shop premium slippers and quality caps at affordable prices. Free delivery on qualifying orders.",
       },
       { property: "og:title", content: "Yonny's Shop — Comfort Starts at Home" },
       {
         property: "og:description",
-        content: "Premium slippers and quality bedding for everyday comfort.",
+        content: "Premium slippers and quality caps for everyday style.",
       },
     ],
   }),
@@ -39,11 +38,11 @@ function Home() {
               New Season · 2026
             </span>
             <h1 className="mt-4 text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              Comfort starts <br className="hidden sm:block" />
-              at home.
+              Cool on top, <br className="hidden sm:block" />
+              comfy on bottom.
             </h1>
             <p className="mt-5 max-w-md text-base text-muted-foreground">
-              Shop premium slippers and quality bedding at affordable prices. Made for the way you
+              Shop premium slippers and quality caps at affordable prices. Made for the way you
               live, priced for the way you shop.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -62,7 +61,6 @@ function Home() {
             </div>
             <div className="mt-10 flex items-center gap-6 text-xs text-muted-foreground">
               <div className="flex items-center gap-2">
-                <StarRating value={5} />
                 <span>4.9 avg from 1,200+ customers</span>
               </div>
             </div>
@@ -108,10 +106,10 @@ function Home() {
           />
           <CategoryCard
             to="/shop"
-            search={{ category: "bedding" }}
-            title="Bedding"
-            subtitle="Sheets · Duvets · Blankets"
-            image={catBedding}
+            search={{ category: "caps" }}
+            title="Caps"
+            subtitle="Snapbacks · Baseball · Bucket"
+            image={catCaps}
           />
         </div>
       </section>
@@ -129,7 +127,7 @@ function Home() {
         </div>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((p) => (
-            <ProductCard key={p.id} product={p} />
+            <ProductCard key={p.id} product={p} hideDetails />
           ))}
         </div>
       </section>
@@ -149,28 +147,6 @@ function Home() {
             <Perk icon={ShieldCheck} title="Secure Payments" desc="Mobile Money, Visa, PayPal." />
             <Perk icon={HeadphonesIcon} title="Real Support" desc="Humans, not scripts." />
           </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="container-page py-24">
-        <div className="mb-12 text-center">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Loved by our customers</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Real reviews from real orders.</p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <figure
-              key={i}
-              className="flex flex-col rounded-2xl border border-hairline bg-background p-6"
-            >
-              <StarRating value={5} />
-              <blockquote className="mt-4 text-sm leading-relaxed text-foreground">
-                “{t.quote}”
-              </blockquote>
-              <figcaption className="mt-6 text-xs text-muted-foreground">— {t.name}</figcaption>
-            </figure>
-          ))}
         </div>
       </section>
 
@@ -269,18 +245,4 @@ function Perk({
   );
 }
 
-const TESTIMONIALS = [
-  {
-    quote:
-      "The sheets are ridiculously soft and the delivery was next-day. I've reordered twice already.",
-    name: "Ama K., Accra",
-  },
-  {
-    quote: "Best slippers I've owned. They look premium and my feet don't want to take them off.",
-    name: "Kwame O., Kumasi",
-  },
-  {
-    quote: "Clean design, easy checkout with Mobile Money. Feels like a real premium brand.",
-    name: "Nana Y., Tema",
-  },
-];
+

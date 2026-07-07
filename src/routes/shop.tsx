@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
-import { products, slipperSubcategories, beddingSubcategories } from "@/data/products";
+import { products, slipperSubcategories, capsSubcategories } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 
 const shopSearchSchema = z.object({
-  category: fallback(z.enum(["slippers", "bedding", "all"]), "all").default("all"),
+  category: fallback(z.enum(["slippers", "caps", "all"]), "all").default("all"),
   q: fallback(z.string(), "").default(""),
   sort: fallback(z.enum(["new", "price-asc", "price-desc", "popular"]), "new").default("new"),
 });
@@ -60,8 +60,8 @@ function Shop() {
   const subcats =
     category === "slippers"
       ? slipperSubcategories
-      : category === "bedding"
-        ? beddingSubcategories
+      : category === "caps"
+        ? capsSubcategories
         : [];
 
   return (
@@ -71,7 +71,7 @@ function Shop() {
           Shop
         </p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-          {category === "slippers" ? "Slippers" : category === "bedding" ? "Bedding" : "All products"}
+          {category === "slippers" ? "Slippers" : category === "caps" ? "Caps" : "All products"}
         </h1>
       </div>
 
@@ -115,7 +115,7 @@ function Shop() {
           <FilterGroup title="Category">
             <FilterLink label="All" active={category === "all"} to="/shop" search={{ category: "all" as const }} />
             <FilterLink label="Slippers" active={category === "slippers"} to="/shop" search={{ category: "slippers" as const }} />
-            <FilterLink label="Bedding" active={category === "bedding"} to="/shop" search={{ category: "bedding" as const }} />
+            <FilterLink label="Caps" active={category === "caps"} to="/shop" search={{ category: "caps" as const }} />
           </FilterGroup>
 
           {subcats.length > 0 && (

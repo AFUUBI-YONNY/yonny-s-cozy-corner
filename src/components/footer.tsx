@@ -7,9 +7,9 @@ export function Footer() {
       <div className="container-page py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <p className="text-lg font-semibold tracking-tight">Yonny&apos;s Shop</p>
+            <p className="text-lg font-semibold tracking-tight">Business Arena</p>
             <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-              Quality slippers and bedding for everyday comfort. Made to make home feel like home.
+              Quality slippers and caps for everyday style. Made to make every look complete.
             </p>
             <div className="mt-6 flex items-center gap-2">
               {[Instagram, Facebook, Twitter].map((Icon, i) => (
@@ -30,7 +30,7 @@ export function Footer() {
             links={[
               { to: "/shop", label: "All Products" },
               { to: "/shop", label: "Slippers", search: { category: "slippers" } },
-              { to: "/shop", label: "Bedding", search: { category: "bedding" } },
+              { to: "/shop", label: "Caps", search: { category: "caps" } },
               { to: "/wishlist", label: "Wishlist" },
             ]}
           />

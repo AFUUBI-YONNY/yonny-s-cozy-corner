@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, ShoppingBag, X } from "lucide-react";
 import { toast } from "sonner";
 import { formatPrice, products } from "@/data/products";
-import { StarRating } from "@/components/star-rating";
 import { useStore } from "@/lib/store";
 
 export const Route = createFileRoute("/wishlist")({
@@ -57,7 +56,6 @@ function WishlistPage() {
               </Link>
               <p className="mt-1 text-xs text-muted-foreground">{p.subcategory}</p>
               <div className="mt-2 flex items-center gap-3">
-                <StarRating value={p.rating} />
                 <span className="text-sm font-medium">{formatPrice(p.price)}</span>
               </div>
             </div>

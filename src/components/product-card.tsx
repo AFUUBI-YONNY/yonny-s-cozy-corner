@@ -2,11 +2,10 @@ import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 import { formatPrice, type Product } from "@/data/products";
-import { StarRating } from "./star-rating";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, hideDetails = true }: { product: Product; hideDetails?: boolean }) {
   const { addToCart, toggleWishlist, isWishlisted } = useStore();
   const wished = isWishlisted(product.id);
 
@@ -76,28 +75,30 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="mt-4 flex flex-col gap-1.5">
-        <div className="flex items-center justify-between gap-3">
-          <Link
-            to="/product/$id"
-            params={{ id: product.id }}
-            className="truncate text-sm font-medium text-foreground"
-          >
-            {product.name}
-          </Link>
-        </div>
-        <p className="text-xs text-muted-foreground">{product.subcategory}</p>
-        <div className="mt-1 flex items-baseline gap-2">
-          <span className="text-sm font-semibold text-foreground">{formatPrice(product.price)}</span>
-          {product.compareAt && (
-            <span className="text-xs text-muted-foreground line-through">
-              {formatPrice(product.compareAt)}
-            </span>
-          )}
-        </div>
-        <div className="mt-1 flex items-center gap-2">
-          <StarRating value={product.rating} />
-          <span className="text-xs text-muted-foreground">({product.reviews})</span>
-        </div>
+        {!hideDetails && (
+          <>
+            <div className="flex items-center justify-between gap-3">
+              <Link
+                to="/product/$id"
+                params={{ id: product.id }}
+                className="truncate text-sm font-medium text-foreground"
+              >
+                {product.name}
+              </Link>
+            </div>
+            <p className="text-xs text-muted-foreground">{product.subcategory}</p>
+            <div className="mt-1 flex items-baseline gap-2">
+              <span className="text-sm font-semibold text-foreground">{formatPrice(product.price)}</span>
+              {product.compareAt && (
+                <span className="text-xs text-muted-foreground line-through">
+                  {formatPrice(product.compareAt)}
+                </span>
+              )}
+            </div>
+            <div className="mt-1 flex items-center gap-2">
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

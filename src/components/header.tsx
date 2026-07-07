@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/shop", label: "Shop" },
   { to: "/shop", search: { category: "slippers" as const }, label: "Slippers" },
-  { to: "/shop", search: { category: "bedding" as const }, label: "Bedding" },
+  { to: "/shop", search: { category: "caps" as const }, label: "Caps" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
@@ -22,7 +22,7 @@ export function Header() {
       <div className="container-page flex h-16 items-center justify-between gap-6">
         {/* Logo — left */}
         <Link to="/" className="flex shrink-0 items-center gap-2">
-          <span className="text-lg font-semibold tracking-tight">Yonny&apos;s Shop</span>
+          <span className="text-lg font-semibold tracking-tight">Business Arena</span>
         </Link>
 
         {/* Nav — center */}

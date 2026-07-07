@@ -4,7 +4,6 @@ import { Heart, Minus, Plus, ShieldCheck, Truck, RotateCcw } from "lucide-react"
 import { toast } from "sonner";
 import { formatPrice, getProduct, products } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
-import { StarRating } from "@/components/star-rating";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
@@ -44,7 +43,7 @@ function ProductPage() {
   const [color, setColor] = useState(product.colors[0]);
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(product.images[0]);
-  const [tab, setTab] = useState<"desc" | "specs" | "reviews">("desc");
+  const [tab, setTab] = useState<"desc" | "specs">("desc");
 
   const related = products.filter((p) => p.id !== product.id && p.category === product.category).slice(0, 4);
 
@@ -105,10 +104,6 @@ function ProductPage() {
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{product.name}</h1>
 
           <div className="mt-3 flex items-center gap-3">
-            <StarRating value={product.rating} />
-            <span className="text-xs text-muted-foreground">
-              {product.rating} · {product.reviews} reviews
-            </span>
           </div>
 
           <div className="mt-6 flex items-baseline gap-3">
@@ -234,7 +229,7 @@ function ProductPage() {
           {/* Tabs */}
           <div className="mt-10">
             <div className="flex gap-6 border-b border-hairline">
-              {(["desc", "specs", "reviews"] as const).map((t) => (
+              {(["desc", "specs"] as const).map((t) => (
                 <button
                   key={t}
                   type="button"
@@ -246,7 +241,7 @@ function ProductPage() {
                       : "border-transparent text-muted-foreground hover:text-foreground",
                   )}
                 >
-                  {t === "desc" ? "Description" : t === "specs" ? "Specifications" : "Reviews"}
+                  {t === "desc" ? "Description" : "Specifications"}
                 </button>
               ))}
             </div>
@@ -259,19 +254,6 @@ function ProductPage() {
                   <li><span className="text-foreground">Colors:</span> {product.colors.join(", ")}</li>
                   <li><span className="text-foreground">Care:</span> Machine wash cold, tumble dry low.</li>
                 </ul>
-              )}
-              {tab === "reviews" && (
-                <div className="space-y-4">
-                  {[1, 2].map((i) => (
-                    <div key={i} className="rounded-xl border border-hairline p-4">
-                      <StarRating value={5} />
-                      <p className="mt-2 text-sm text-foreground">
-                        Excellent quality, exactly as described. Would buy again.
-                      </p>
-                      <p className="mt-2 text-xs text-muted-foreground">— Verified customer</p>
-                    </div>
-                  ))}
-                </div>
               )}
             </div>
           </div>

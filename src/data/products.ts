@@ -1,9 +1,10 @@
-import cap1 from "@/assets/cap1.jpeg";
-import cap2 from "@/assets/cap2.jpeg";
-import cap5 from "@/assets/cap5.jpeg";
 import cap6 from "@/assets/cap6.jpeg";
 import cap7 from "@/assets/cap7.jpeg";
 import image from "@/assets/image.jpeg";
+
+const slipper1 = "https://placehold.co/800x800/e8e0d8/6b5e52?text=Slippers";
+const slipper2 = "https://placehold.co/800x800/d8e0e8/526b6b?text=Slippers";
+const slipper3 = "https://placehold.co/800x800/e0e8d8/5e6b52?text=Slippers";
 
 export type Product = {
   id: string;
@@ -12,7 +13,7 @@ export type Product = {
   compareAt?: number;
   rating: number;
   reviews: number;
-  category: "slippers" | "bedding";
+  category: "slippers" | "caps";
   subcategory: string;
   image: string;
   images: string[];
@@ -34,8 +35,8 @@ export const products: Product[] = [
     reviews: 214,
     category: "slippers",
     subcategory: "Indoor Slippers",
-    image: cap1,
-    images: [cap1, cap2, cap5],
+    image: slipper1,
+    images: [slipper1, slipper2, slipper3],
     colors: ["Beige", "White", "Charcoal"],
     sizes: ["S", "M", "L", "XL"],
     stock: 42,
@@ -51,8 +52,8 @@ export const products: Product[] = [
     reviews: 168,
     category: "slippers",
     subcategory: "Women's Slippers",
-    image: cap2,
-    images: [cap2, cap1],
+    image: slipper2,
+    images: [slipper2, slipper1],
     sizes: ["S", "M", "L"],
     stock: 30,
     description:
@@ -67,8 +68,8 @@ export const products: Product[] = [
     reviews: 92,
     category: "slippers",
     subcategory: "Men's Slippers",
-    image: cap5,
-    images: [cap5, cap1],
+    image: slipper3,
+    images: [slipper3, slipper1],
     colors: ["Black", "Charcoal"],
     sizes: ["M", "L", "XL", "XXL"],
     stock: 18,
@@ -76,54 +77,55 @@ export const products: Product[] = [
       "A slipper that dresses up. Premium leather-look upper with a soft footbed and durable rubber outsole for indoor–outdoor wear.",
   },
   {
-    id: "pure-white-sheet-set",
-    name: "Pure White Cotton Sheet Set",
-    price: 289,
-    compareAt: 329,
+    id: "classic-snapback-cap",
+    name: "Classic Snapback Cap",
+    price: 80,
+    compareAt: 109,
     rating: 4.9,
     reviews: 341,
-    category: "bedding",
-    subcategory: "Bedsheets",
+    category: "caps",
+    subcategory: "Snapbacks",
     image: cap6,
     images: [cap6, cap7],
-    colors: ["White", "Beige"],
-    sizes: ["Twin", "Full", "Queen", "King"],
+    colors: ["Black", "White", "Navy"],
+    sizes: ["One Size"],
     stock: 55,
     description:
-      "400 thread-count long-staple cotton. Crisp, cool, and softer with every wash. Includes flat sheet, fitted sheet and two pillowcases.",
+      "A clean, structured snapback with a flat brim and adjustable back strap. Fits all head sizes comfortably.",
     isBestseller: true,
   },
   {
-    id: "linen-duvet-set",
-    name: "Washed Linen Duvet Set",
-    price: 449,
+    id: "fitted-baseball-cap",
+    name: "Fitted Baseball Cap",
+    price: 80,
     rating: 4.8,
     reviews: 127,
-    category: "bedding",
-    subcategory: "Duvets",
+    category: "caps",
+    subcategory: "Baseball Caps",
     image: cap7,
     images: [cap7, cap6],
-    sizes: ["Queen", "King"],
+    colors: ["Beige", "Black", "Olive"],
+    sizes: ["S/M", "L/XL"],
     stock: 22,
     description:
-      "Stonewashed European linen duvet cover with two shams. Naturally breathable, gets better with time.",
+      "Premium cotton twill baseball cap with a pre-curved brim. Lightweight and breathable for all-day wear.",
     isNew: true,
   },
   {
-    id: "wool-throw-blanket",
-    name: "Merino Wool Throw Blanket",
-    price: 199,
+    id: "bucket-hat",
+    name: "Cotton Bucket Hat",
+    price: 80,
     rating: 4.7,
     reviews: 76,
-    category: "bedding",
-    subcategory: "Blankets",
+    category: "caps",
+    subcategory: "Bucket Hats",
     image: image,
     images: [image, cap6],
-    colors: ["Gray", "Beige"],
-    sizes: ["Throw", "Queen"],
+    colors: ["Beige", "White", "Charcoal"],
+    sizes: ["S/M", "L/XL"],
     stock: 40,
     description:
-      "Lightweight merino wool throw with hand-tied fringe. Warm enough for the couch, elegant enough for the foot of the bed.",
+      "Relaxed cotton bucket hat with a wide brim for sun protection. Soft, packable, and perfect for everyday wear.",
   },
 ];
 
@@ -136,14 +138,13 @@ export const slipperSubcategories = [
   "Children's Slippers",
 ];
 
-export const beddingSubcategories = [
-  "Bedsheets",
-  "Pillowcases",
-  "Duvets",
-  "Comforters",
-  "Blankets",
-  "Mattress Protectors",
-  "Bed Covers",
+export const capsSubcategories = [
+  "Snapbacks",
+  "Baseball Caps",
+  "Bucket Hats",
+  "Fitted Caps",
+  "Dad Hats",
+  "Beanies",
 ];
 
 export function getProduct(id: string) {
