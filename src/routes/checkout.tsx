@@ -19,9 +19,7 @@ export const Route = createFileRoute("/checkout")({
 function CheckoutPage() {
   const { cartDetailed, subtotal, clearCart } = useStore();
   const navigate = useNavigate();
-  const [payment, setPayment] = useState<"momo" | "card" | "paypal">("momo");
-  const shipping = subtotal > 500 ? 0 : 25;
-  const total = subtotal + shipping;
+  const [payment, setPayment] = useState<"momo" | "card">("momo");
 
   if (cartDetailed.length === 0) {
     return (
@@ -67,14 +65,7 @@ function CheckoutPage() {
             <Field label="Delivery notes (optional)" />
           </Section>
 
-          <Section title="3. Delivery method">
-            <div className="grid gap-3 sm:grid-cols-2">
-              <OptionCard title="Standard · 2–3 days" desc="Free on orders over GH₵ 500" selected />
-              <OptionCard title="Express · Next day" desc="+ GH₵ 45" />
-            </div>
-          </Section>
-
-          <Section title="4. Payment method">
+          <Section title="3. Payment method">
             <div className="grid gap-3 sm:grid-cols-3">
               <PaymentCard
                 icon={Smartphone}
@@ -89,13 +80,6 @@ function CheckoutPage() {
                 desc="Visa · Mastercard"
                 active={payment === "card"}
                 onClick={() => setPayment("card")}
-              />
-              <PaymentCard
-                icon={Wallet}
-                title="PayPal"
-                desc="Fast & secure"
-                active={payment === "paypal"}
-                onClick={() => setPayment("paypal")}
               />
             </div>
 
@@ -119,7 +103,7 @@ function CheckoutPage() {
             type="submit"
             className="w-full rounded-full bg-foreground px-6 py-4 text-sm font-medium text-background transition hover:bg-foreground/90"
           >
-            Place order · {formatPrice(total)}
+            Place order · {formatPrice(subtotal)}
           </button>
         </form>
 
@@ -150,13 +134,9 @@ function CheckoutPage() {
               <dt className="text-muted-foreground">Subtotal</dt>
               <dd>{formatPrice(subtotal)}</dd>
             </div>
-            <div className="flex justify-between">
-              <dt className="text-muted-foreground">Shipping</dt>
-              <dd>{shipping === 0 ? "Free" : formatPrice(shipping)}</dd>
-            </div>
             <div className="mt-3 flex justify-between border-t border-hairline pt-3 text-base font-semibold">
               <dt>Total</dt>
-              <dd>{formatPrice(total)}</dd>
+              <dd>{formatPrice(subtotal)}</dd>
             </div>
           </dl>
         </aside>

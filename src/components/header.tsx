@@ -3,11 +3,13 @@ import { Heart, Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { useState } from "react";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo.png";
 
 const NAV = [
   { to: "/shop", label: "Shop" },
   { to: "/shop", search: { category: "slippers" as const }, label: "Slippers" },
   { to: "/shop", search: { category: "caps" as const }, label: "Caps" },
+  { to: "/shop", search: { category: "phone-covers" as const }, label: "Phone Covers" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
@@ -22,6 +24,7 @@ export function Header() {
       <div className="container-page flex h-16 items-center justify-between gap-6">
         {/* Logo — left */}
         <Link to="/" className="flex shrink-0 items-center gap-2">
+          <img src={logo} alt="Business Arena logo" className="h-8 w-8 object-contain" />
           <span className="text-lg font-semibold tracking-tight">Business Arena</span>
         </Link>
 

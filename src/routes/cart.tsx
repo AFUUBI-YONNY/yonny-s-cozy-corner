@@ -16,8 +16,6 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const { cartDetailed, updateQty, removeFromCart, subtotal } = useStore();
-  const shipping = cartDetailed.length > 0 ? (subtotal > 500 ? 0 : 25) : 0;
-  const total = subtotal + shipping;
 
   if (cartDetailed.length === 0) {
     return (
@@ -120,17 +118,9 @@ function CartPage() {
               <dt className="text-muted-foreground">Subtotal</dt>
               <dd>{formatPrice(subtotal)}</dd>
             </div>
-            <div className="flex justify-between">
-              <dt className="text-muted-foreground">Shipping</dt>
-              <dd>{shipping === 0 ? "Free" : formatPrice(shipping)}</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-muted-foreground">Discount</dt>
-              <dd>—</dd>
-            </div>
             <div className="mt-4 flex justify-between border-t border-hairline pt-4 text-base font-semibold">
               <dt>Total</dt>
-              <dd>{formatPrice(total)}</dd>
+              <dd>{formatPrice(subtotal)}</dd>
             </div>
           </dl>
           <Link
@@ -140,7 +130,7 @@ function CartPage() {
             Proceed to Checkout
           </Link>
           <p className="mt-3 text-center text-xs text-muted-foreground">
-            Secure checkout · Mobile Money · Cards · PayPal
+            Secure checkout · Mobile Money · Cards
           </p>
         </aside>
       </div>

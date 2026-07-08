@@ -5,7 +5,7 @@ import { formatPrice, type Product } from "@/data/products";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
-export function ProductCard({ product, hideDetails = true }: { product: Product; hideDetails?: boolean }) {
+export function ProductCard({ product, hideDetails = false }: { product: Product; hideDetails?: boolean }) {
   const { addToCart, toggleWishlist, isWishlisted } = useStore();
   const wished = isWishlisted(product.id);
 
@@ -95,9 +95,12 @@ export function ProductCard({ product, hideDetails = true }: { product: Product;
                 </span>
               )}
             </div>
-            <div className="mt-1 flex items-center gap-2">
-            </div>
           </>
+        )}
+        {product.stock === 0 && (
+          <span className="mt-1 w-fit rounded-full bg-muted px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+            Sold Out
+          </span>
         )}
       </div>
     </div>

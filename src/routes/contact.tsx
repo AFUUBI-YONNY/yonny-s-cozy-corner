@@ -24,7 +24,7 @@ function ContactPage() {
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
           Questions about a product, an order, or a return? Send us a note and we&apos;ll reply
-          within a few hours during business days.
+          within a few hours — we&apos;re available every day.
         </p>
       </div>
 
@@ -59,19 +59,13 @@ function ContactPage() {
         </form>
 
         <aside className="space-y-4">
-          <ContactCard icon={MapPin} title="Visit us" body="12 Independence Ave, Accra, Ghana" />
-          <ContactCard icon={Phone} title="Call us" body="+233 (0) 24 000 0000" />
-          <ContactCard icon={Mail} title="Email" body="hello@yonnys.shop" />
+          <ContactCard icon={MapPin} title="Visit us" body="Abelemkpe, Afriyie Street 39, Accra, Ghana" />
+          <ContactCard icon={Phone} title="Call us" body="+233 059 258 8531" />
+          <ContactCard icon={Mail} title="Email" body="yonnyafuubi477@gmail.com" />
           <ContactCard
             icon={Clock}
             title="Business hours"
-            body={
-              <>
-                Mon–Fri · 9:00 – 18:00
-                <br />
-                Sat · 10:00 – 15:00
-              </>
-            }
+            body="Open 24 hours · Every day"
           />
           <div className="overflow-hidden rounded-2xl border border-hairline">
             <iframe

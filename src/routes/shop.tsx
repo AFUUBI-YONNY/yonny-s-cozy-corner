@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
-import { products, slipperSubcategories, capsSubcategories } from "@/data/products";
+import { products, slipperSubcategories, capsSubcategories, phoneCoversSubcategories } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 
 const shopSearchSchema = z.object({
-  category: fallback(z.enum(["slippers", "caps", "all"]), "all").default("all"),
+  category: fallback(z.enum(["slippers", "caps", "phone-covers", "all"]), "all").default("all"),
   q: fallback(z.string(), "").default(""),
   sort: fallback(z.enum(["new", "price-asc", "price-desc", "popular"]), "new").default("new"),
 });
@@ -60,9 +60,9 @@ function Shop() {
   const subcats =
     category === "slippers"
       ? slipperSubcategories
-      : category === "caps"
-        ? capsSubcategories
-        : [];
+      : category === "phone-covers"
+          ? phoneCoversSubcategories
+          : [];
 
   return (
     <div className="container-page py-10 md:py-14">
@@ -71,7 +71,7 @@ function Shop() {
           Shop
         </p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-          {category === "slippers" ? "Slippers" : category === "caps" ? "Caps" : "All products"}
+          {category === "slippers" ? "Slippers" : category === "caps" ? "Caps" : category === "phone-covers" ? "Phone Covers" : "All products"}
         </h1>
       </div>
 
@@ -103,8 +103,6 @@ function Shop() {
           >
             <option value="new">Newest</option>
             <option value="popular">Popular</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
           </select>
         </div>
       </div>
@@ -116,6 +114,7 @@ function Shop() {
             <FilterLink label="All" active={category === "all"} to="/shop" search={{ category: "all" as const }} />
             <FilterLink label="Slippers" active={category === "slippers"} to="/shop" search={{ category: "slippers" as const }} />
             <FilterLink label="Caps" active={category === "caps"} to="/shop" search={{ category: "caps" as const }} />
+            <FilterLink label="Phone Covers" active={category === "phone-covers"} to="/shop" search={{ category: "phone-covers" as const }} />
           </FilterGroup>
 
           {subcats.length > 0 && (
@@ -133,28 +132,21 @@ function Shop() {
             </FilterGroup>
           )}
 
-          <FilterGroup title="Price">
-            {["Under GH₵ 150", "GH₵ 150 – 300", "GH₵ 300 – 500", "GH₵ 500+"].map((p: string) => (
-              <label key={p} className="flex items-center gap-2 py-1.5 text-sm text-muted-foreground">
-                <input type="checkbox" className="h-3.5 w-3.5 accent-foreground" />
-                {p}
-              </label>
-            ))}
-          </FilterGroup>
-
-          <FilterGroup title="Size">
-            <div className="flex flex-wrap gap-2">
-              {["S", "M", "L", "XL", "Queen", "King"].map((s: string) => (
-                <button
-                  key={s}
-                  type="button"
-                  className="rounded-full border border-hairline px-3 py-1 text-xs text-foreground transition hover:bg-foreground hover:text-background"
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </FilterGroup>
+          {category === "slippers" && (
+            <FilterGroup title="Size">
+              <div className="flex flex-wrap gap-2">
+                {["40", "41", "42", "43", "44", "45", "46"].map((s: string) => (
+                  <button
+                    key={s}
+                    type="button"
+                    className="rounded-full border border-hairline px-3 py-1 text-xs text-foreground transition hover:bg-foreground hover:text-background"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </FilterGroup>
+          )}
         </aside>
 
         {/* Grid */}

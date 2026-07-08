@@ -3,10 +3,10 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Yonny's Shop" },
-      { name: "description", content: "About Yonny's Shop — quality slippers and bedding, thoughtfully made." },
-      { property: "og:title", content: "About — Yonny's Shop" },
-      { property: "og:description", content: "About Yonny's Shop." },
+      { title: "About — Business Arena" },
+      { name: "description", content: "About Business Arena — quality slippers and caps, thoughtfully made." },
+      { property: "og:title", content: "About — Business Arena" },
+      { property: "og:description", content: "About Business Arena." },
     ],
   }),
   component: AboutPage,
@@ -18,23 +18,23 @@ function AboutPage() {
       <div className="max-w-2xl">
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">About</p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-          Made for the way you live.
+          Cool on top, comfy on bottom.
         </h1>
         <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-          Yonny&apos;s Shop was started with a simple idea: home should feel like home. We work
-          directly with mills and workshops we trust to bring you slippers and bedding that are
-          soft, honest, and built to last — priced the way things should be priced.
+          Business Arena was built with one idea in mind: style and comfort should go together.
+          We work directly with trusted makers to bring you slippers and caps that look great,
+          feel great, and are priced the way things should be priced.
         </p>
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-          Every product we ship is one we&apos;d put in our own bedroom. Nothing louder than that.
+          Every product we ship is one we&apos;d wear ourselves. Nothing louder than that.
         </p>
       </div>
 
       <div className="mt-16 grid gap-8 sm:grid-cols-3">
         {[
           { n: "10k+", l: "Happy customers" },
-          { n: "4.9★", l: "Average rating" },
-          { n: "1–3 days", l: "Delivery nationwide" },
+          { n: "2 categories", l: "Slippers & Caps" },
+          { n: "24/7", l: "We're always open" },
         ].map((s) => (
           <div key={s.l} className="rounded-2xl border border-hairline bg-surface p-8">
             <p className="text-3xl font-semibold tracking-tight">{s.n}</p>

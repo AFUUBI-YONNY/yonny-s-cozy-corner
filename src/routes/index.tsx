@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, Truck, HeadphonesIcon, BadgeCheck, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck, HeadphonesIcon, BadgeCheck, Sparkles } from "lucide-react";
 import hero from "@/assets/cap1.jpeg";
-import catSlippers from "@/assets/cap5.jpeg";
-import catCaps from "@/assets/cap6.jpeg";
+import catSlippers from "@/assets/slipper1.jpeg";
+import catCaps from "@/assets/cap1.jpeg";
+import catCovers from "@/assets/cover1.jpeg";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
 
@@ -26,7 +27,11 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const featured = products.slice(0, 4);
+  const featured = [
+    ...products.filter((p) => p.category === "slippers").slice(0, 2),
+    ...products.filter((p) => p.category === "caps").slice(0, 2),
+    ...products.filter((p) => p.category === "phone-covers").slice(0, 2),
+  ];
 
   return (
     <div>
@@ -59,11 +64,7 @@ function Home() {
                 View Categories
               </Link>
             </div>
-            <div className="mt-10 flex items-center gap-6 text-xs text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <span>4.9 avg from 1,200+ customers</span>
-              </div>
-            </div>
+
           </div>
           <div className="relative">
             <div className="overflow-hidden rounded-2xl bg-background">
@@ -96,7 +97,7 @@ function Home() {
           </Link>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-3">
           <CategoryCard
             to="/shop"
             search={{ category: "slippers" }}
@@ -110,6 +111,13 @@ function Home() {
             title="Caps"
             subtitle="Snapbacks · Baseball · Bucket"
             image={catCaps}
+          />
+          <CategoryCard
+            to="/shop"
+            search={{ category: "phone-covers" }}
+            title="Phone Covers"
+            subtitle="iPhone Cases"
+            image={catCovers}
           />
         </div>
       </section>
@@ -125,26 +133,25 @@ function Home() {
             View all
           </Link>
         </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p) => (
             <ProductCard key={p.id} product={p} hideDetails />
           ))}
         </div>
       </section>
 
-      {/* WHY US */}
+      {/* WHY BUSINESS ARENA */}
       <section className="mt-20 bg-surface">
         <div className="container-page py-20">
           <h2 className="text-center text-2xl font-semibold tracking-tight sm:text-3xl">
-            Why Yonny&apos;s
+            Why Business Arena&apos;s
           </h2>
           <p className="mx-auto mt-2 max-w-lg text-center text-sm text-muted-foreground">
             The little things we insist on so you don&apos;t have to think about them.
           </p>
           <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <Perk icon={BadgeCheck} title="High Quality" desc="Tested, trusted materials only." />
-            <Perk icon={Truck} title="Fast Delivery" desc="Nationwide shipping in 1–3 days." />
-            <Perk icon={ShieldCheck} title="Secure Payments" desc="Mobile Money, Visa, PayPal." />
+            <Perk icon={ShieldCheck} title="Secure Payments" desc="Mobile Money, Visa." />
             <Perk icon={HeadphonesIcon} title="Real Support" desc="Humans, not scripts." />
           </div>
         </div>
@@ -225,6 +232,8 @@ function CategoryCard({
   );
 }
 
+
+
 function Perk({
   icon: Icon,
   title,
@@ -244,5 +253,3 @@ function Perk({
     </div>
   );
 }
-
-

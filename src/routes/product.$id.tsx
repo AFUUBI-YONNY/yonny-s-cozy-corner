@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { Heart, Minus, Plus, ShieldCheck, Truck, RotateCcw } from "lucide-react";
+import { Heart, Minus, Plus, ShieldCheck, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { formatPrice, getProduct, products } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
@@ -192,14 +192,16 @@ function ProductPage() {
             <button
               type="button"
               onClick={() => handleAdd(false)}
-              className="flex-1 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition hover:bg-foreground/90"
+              disabled={product.stock === 0}
+              className="flex-1 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition hover:bg-foreground/90 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Add to Cart
+              {product.stock === 0 ? "Sold Out" : "Add to Cart"}
             </button>
             <button
               type="button"
               onClick={() => handleAdd(true)}
-              className="flex-1 rounded-full border border-foreground px-6 py-3 text-sm font-medium text-foreground transition hover:bg-foreground hover:text-background"
+              disabled={product.stock === 0}
+              className="flex-1 rounded-full border border-foreground px-6 py-3 text-sm font-medium text-foreground transition hover:bg-foreground hover:text-background disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Buy Now
             </button>
@@ -214,10 +216,7 @@ function ProductPage() {
           </div>
 
           {/* Trust */}
-          <div className="mt-8 grid grid-cols-3 gap-3 border-t border-hairline pt-6 text-xs text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Truck size={14} /> Fast delivery
-            </div>
+          <div className="mt-8 grid grid-cols-2 gap-3 border-t border-hairline pt-6 text-xs text-muted-foreground">
             <div className="flex items-center gap-2">
               <RotateCcw size={14} /> 30-day returns
             </div>
