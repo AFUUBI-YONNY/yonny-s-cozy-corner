@@ -91,6 +91,7 @@ export function Footer() {
               { to: "/privacy", label: "Privacy Policy" },
               { to: "/terms", label: "Terms of Service" },
               { to: "/shipping", label: "Shipping & Returns" },
+              { to: "/admin", label: "Admin" },
             ]}
           />
         </div>
