@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
-import { products, slipperSubcategories, capsSubcategories, phoneCoversSubcategories } from "@/data/products";
+import { products, slipperSubcategories, capsSubcategories, phoneCoversSubcategories, shirtsSubcategories } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 
 const shopSearchSchema = z.object({
-  category: fallback(z.enum(["slippers", "caps", "phone-covers", "all"]), "all").default("all"),
+  category: fallback(z.enum(["slippers", "caps", "phone-covers", "shirts", "all"]), "all").default("all"),
   q: fallback(z.string(), "").default(""),
   sort: fallback(z.enum(["new", "price-asc", "price-desc", "popular"]), "new").default("new"),
 });
@@ -62,7 +62,9 @@ function Shop() {
       ? slipperSubcategories
       : category === "phone-covers"
           ? phoneCoversSubcategories
-          : [];
+          : category === "shirts"
+              ? shirtsSubcategories
+              : [];
 
   return (
     <div className="container-page py-10 md:py-14">
@@ -71,7 +73,7 @@ function Shop() {
           Shop
         </p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-          {category === "slippers" ? "Slippers" : category === "caps" ? "Caps" : category === "phone-covers" ? "Phone Covers" : "All products"}
+          {category === "slippers" ? "Slippers" : category === "caps" ? "Caps" : category === "phone-covers" ? "Phone Covers" : category === "shirts" ? "Shirts" : "All products"}
         </h1>
       </div>
 
@@ -114,6 +116,7 @@ function Shop() {
             <FilterLink label="All" active={category === "all"} to="/shop" search={{ category: "all" as const }} />
             <FilterLink label="Slippers" active={category === "slippers"} to="/shop" search={{ category: "slippers" as const }} />
             <FilterLink label="Caps" active={category === "caps"} to="/shop" search={{ category: "caps" as const }} />
+            <FilterLink label="Shirts" active={category === "shirts"} to="/shop" search={{ category: "shirts" as const }} />
             <FilterLink label="Phone Covers" active={category === "phone-covers"} to="/shop" search={{ category: "phone-covers" as const }} />
           </FilterGroup>
 
@@ -132,18 +135,17 @@ function Shop() {
             </FilterGroup>
           )}
 
-          {category === "slippers" && (
+          {(category === "slippers" || category === "shirts") && (
             <FilterGroup title="Size">
               <div className="flex flex-wrap gap-2">
-                {["40", "41", "42", "43", "44", "45", "46"].map((s: string) => (
-                  <button
-                    key={s}
-                    type="button"
-                    className="rounded-full border border-hairline px-3 py-1 text-xs text-foreground transition hover:bg-foreground hover:text-background"
-                  >
-                    {s}
-                  </button>
-                ))}
+                {category === "slippers"
+                  ? ["40", "41", "42", "43", "44", "45", "46"].map((s: string) => (
+                      <button key={s} type="button" className="rounded-full border border-hairline px-3 py-1 text-xs text-foreground transition hover:bg-foreground hover:text-background">{s}</button>
+                    ))
+                  : ["S", "M", "L", "XL", "XXL"].map((s: string) => (
+                      <button key={s} type="button" className="rounded-full border border-hairline px-3 py-1 text-xs text-foreground transition hover:bg-foreground hover:text-background">{s}</button>
+                    ))
+                }
               </div>
             </FilterGroup>
           )}

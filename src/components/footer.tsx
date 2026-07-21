@@ -73,6 +73,7 @@ export function Footer() {
               { to: "/shop", label: "All Products" },
               { to: "/shop", label: "Slippers", search: { category: "slippers" } },
               { to: "/shop", label: "Caps", search: { category: "caps" } },
+              { to: "/shop", label: "Shirts", search: { category: "shirts" } },
               { to: "/shop", label: "Phone Covers", search: { category: "phone-covers" } },
               { to: "/wishlist", label: "Wishlist" },
             ]}

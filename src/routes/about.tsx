@@ -33,7 +33,7 @@ function AboutPage() {
       <div className="mt-16 grid gap-8 sm:grid-cols-3">
         {[
           { n: "10k+", l: "Happy customers" },
-          { n: "2 categories", l: "Slippers & Caps" },
+          { n: "4 categories", l: "Slippers, Caps, Shirts & Covers" },
           { n: "24/7", l: "We're always open" },
         ].map((s) => (
           <div key={s.l} className="rounded-2xl border border-hairline bg-surface p-8">

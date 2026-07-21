@@ -9,6 +9,7 @@ const NAV = [
   { to: "/shop", label: "Shop" },
   { to: "/shop", search: { category: "slippers" as const }, label: "Slippers" },
   { to: "/shop", search: { category: "caps" as const }, label: "Caps" },
+  { to: "/shop", search: { category: "shirts" as const }, label: "Shirts" },
   { to: "/shop", search: { category: "phone-covers" as const }, label: "Phone Covers" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },

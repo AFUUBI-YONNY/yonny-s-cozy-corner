@@ -19,7 +19,7 @@ import cover5 from "@/assets/cover5.jpeg";
 import cover6 from "@/assets/cover6.jpeg";
 import cover7 from "@/assets/cover7.jpeg";
 import cover8 from "@/assets/cover8.jpeg";
-import cover9 from "@/assets/cover9.jpeg";
+import shirt1 from "@/assets/shirt1.jpeg";
 
 export type Product = {
   id: string;
@@ -28,7 +28,7 @@ export type Product = {
   compareAt?: number;
   rating: number;
   reviews: number;
-  category: "slippers" | "caps" | "phone-covers";
+  category: "slippers" | "caps" | "phone-covers" | "shirts";
   subcategory: string;
   image: string;
   images: string[];
@@ -382,6 +382,70 @@ export const products: Product[] = [
     stock: 42,
     description: "Military-grade shockproof case. Corner air cushions absorb impact from every angle.",
   },
+  // SHIRTS
+  {
+    id: "classic-tee",
+    name: "Classic Crew Tee",
+    price: 120,
+    rating: 4.8,
+    reviews: 180,
+    category: "shirts",
+    subcategory: "T-Shirts",
+    image: shirt1,
+    images: [shirt1],
+    colors: ["White", "Black", "Navy", "Gray"],
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    stock: 50,
+    description: "Clean, everyday crew-neck tee made from soft 100% cotton. A wardrobe essential.",
+    isBestseller: true,
+  },
+  {
+    id: "polo-shirt",
+    name: "Classic Polo Shirt",
+    price: 150,
+    rating: 4.7,
+    reviews: 120,
+    category: "shirts",
+    subcategory: "Polo Shirts",
+    image: shirt1,
+    images: [shirt1],
+    colors: ["Navy", "White", "Black", "Olive"],
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    stock: 40,
+    description: "Smart casual polo shirt with a ribbed collar and short sleeves. Versatile enough for work or the weekend.",
+    isNew: true,
+  },
+  {
+    id: "oversized-tee",
+    name: "Oversized Street Tee",
+    price: 130,
+    rating: 4.9,
+    reviews: 95,
+    category: "shirts",
+    subcategory: "T-Shirts",
+    image: shirt1,
+    images: [shirt1],
+    colors: ["Black", "White", "Beige"],
+    sizes: ["M", "L", "XL", "XXL"],
+    stock: 35,
+    description: "Relaxed oversized fit tee for a laid-back streetwear look. Dropped shoulders, heavyweight cotton.",
+  },
+  {
+    id: "button-up-shirt",
+    name: "Cotton Button-Up Shirt",
+    price: 180,
+    rating: 4.8,
+    reviews: 74,
+    category: "shirts",
+    subcategory: "Casual Shirts",
+    image: shirt1,
+    images: [shirt1],
+    colors: ["White", "Sky Blue", "Beige"],
+    sizes: ["S", "M", "L", "XL"],
+    stock: 28,
+    description: "Lightweight cotton button-up with a relaxed fit. Wear it open over a tee or buttoned up clean.",
+    isNew: true,
+  },
 ];
 
 export const slipperSubcategories = [
@@ -399,6 +463,12 @@ export const capsSubcategories = [
 
 export const phoneCoversSubcategories = [
   "iPhone Cases",
+];
+
+export const shirtsSubcategories = [
+  "T-Shirts",
+  "Polo Shirts",
+  "Casual Shirts",
 ];
 
 export function getProduct(id: string) {

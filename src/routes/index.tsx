@@ -4,6 +4,7 @@ import hero from "@/assets/cap1.jpeg";
 import catSlippers from "@/assets/slipper1.jpeg";
 import catCaps from "@/assets/cap1.jpeg";
 import catCovers from "@/assets/cover1.jpeg";
+import catShirts from "@/assets/shirt1.jpeg";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
 
@@ -28,8 +29,9 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const featured = [
-    ...products.filter((p) => p.category === "slippers").slice(0, 2),
-    ...products.filter((p) => p.category === "caps").slice(0, 2),
+    ...products.filter((p) => p.category === "slippers").slice(0, 1),
+    ...products.filter((p) => p.category === "caps").slice(0, 1),
+    ...products.filter((p) => p.category === "shirts").slice(0, 2),
     ...products.filter((p) => p.category === "phone-covers").slice(0, 2),
   ];
 
@@ -97,7 +99,7 @@ function Home() {
           </Link>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <CategoryCard
             to="/shop"
             search={{ category: "slippers" }}
@@ -111,6 +113,13 @@ function Home() {
             title="Caps"
             subtitle="Snapbacks · Baseball · Bucket"
             image={catCaps}
+          />
+          <CategoryCard
+            to="/shop"
+            search={{ category: "shirts" }}
+            title="Shirts"
+            subtitle="Tees · Polos · Button-Ups"
+            image={catShirts}
           />
           <CategoryCard
             to="/shop"
