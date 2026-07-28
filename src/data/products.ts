@@ -19,6 +19,7 @@ import cover5 from "@/assets/cover5.jpeg";
 import cover6 from "@/assets/cover6.jpeg";
 import cover7 from "@/assets/cover7.jpeg";
 import cover8 from "@/assets/cover8.jpeg";
+import cover9 from "@/assets/cover9.jpeg";
 import shirt1 from "@/assets/shirt1.jpeg";
 
 export type Product = {

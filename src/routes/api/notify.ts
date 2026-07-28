@@ -1,4 +1,4 @@
-import { createAPIFileRoute } from "@tanstack/react-start/api";
+import { createFileRoute } from "@tanstack/react-router";
 import type { Order } from "@/lib/orders";
 
 const RESEND_API_KEY = process.env["RESEND_API_KEY"] ?? "";
@@ -68,53 +68,56 @@ function buildEmailHtml(order: Order): string {
 </html>`;
 }
 
-export const APIRoute = createAPIFileRoute("/api/notify")({
-  POST: async ({ request }) => {
-    if (!RESEND_API_KEY) {
-      return Response.json(
-        { success: false, error: "RESEND_API_KEY not configured" },
-        { status: 500 },
-      );
-    }
+export const Route = createFileRoute("/api/notify")({
+  server: {
+    handlers: {
+      POST: async ({ request }) => {
+        if (!RESEND_API_KEY) {
+          return Response.json(
+            { success: false, error: "RESEND_API_KEY not configured" },
+            { status: 500 },
+          );
+        }
 
-    let order: Order;
-    try {
-      order = (await request.json()) as Order;
-    } catch {
-      return Response.json({ success: false, error: "Invalid request body" }, { status: 400 });
-    }
+        let order: Order;
+        try {
+          order = (await request.json()) as Order;
+        } catch {
+          return Response.json({ success: false, error: "Invalid request body" }, { status: 400 });
+        }
 
-    // Basic validation
-    if (!order.id || !order.customer?.email) {
-      return Response.json({ success: false, error: "Missing required order fields" }, { status: 400 });
-    }
+        if (!order.id || !order.customer?.email) {
+          return Response.json({ success: false, error: "Missing required order fields" }, { status: 400 });
+        }
 
-    try {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${RESEND_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "Business Arena <onboarding@resend.dev>",
-          to: [OWNER_EMAIL],
-          reply_to: order.customer.email,
-          subject: `New Order ${order.id} — GH₵ ${order.total.toFixed(2)}`,
-          html: buildEmailHtml(order),
-        }),
-      });
+        try {
+          const res = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${RESEND_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              from: "Business Arena <onboarding@resend.dev>",
+              to: [OWNER_EMAIL],
+              reply_to: order.customer.email,
+              subject: `New Order ${order.id} — GH₵ ${order.total.toFixed(2)}`,
+              html: buildEmailHtml(order),
+            }),
+          });
 
-      if (!res.ok) {
-        const err = await res.text();
-        console.error("Resend error:", err);
-        return Response.json({ success: false, error: err }, { status: 502 });
-      }
+          if (!res.ok) {
+            const err = await res.text();
+            console.error("Resend error:", err);
+            return Response.json({ success: false, error: err }, { status: 502 });
+          }
 
-      return Response.json({ success: true });
-    } catch (err) {
-      console.error("Email send failed:", err);
-      return Response.json({ success: false, error: String(err) }, { status: 500 });
-    }
+          return Response.json({ success: true });
+        } catch (err) {
+          console.error("Email send failed:", err);
+          return Response.json({ success: false, error: String(err) }, { status: 500 });
+        }
+      },
+    },
   },
 });

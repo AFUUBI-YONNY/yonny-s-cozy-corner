@@ -1,4 +1,4 @@
-import { createAPIFileRoute } from "@tanstack/react-start/api";
+import { createFileRoute } from "@tanstack/react-router";
 import type { Order } from "@/lib/orders";
 
 // CallMeBot — free WhatsApp API. Register at https://www.callmebot.com/blog/free-api-whatsapp-messages/
@@ -39,44 +39,51 @@ function buildWhatsAppMessage(order: Order): string {
   );
 }
 
-export const APIRoute = createAPIFileRoute("/api/whatsapp")({
-  POST: async ({ request }) => {
-    if (!CALLMEBOT_APIKEY) {
-      return Response.json(
-        { success: false, error: "CALLMEBOT_APIKEY not configured. See https://www.callmebot.com/blog/free-api-whatsapp-messages/ to get your free API key." },
-        { status: 500 },
-      );
-    }
+export const Route = createFileRoute("/api/whatsapp")({
+  server: {
+    handlers: {
+      POST: async ({ request }) => {
+        if (!CALLMEBOT_APIKEY) {
+          return Response.json(
+            {
+              success: false,
+              error:
+                "CALLMEBOT_APIKEY not configured. See https://www.callmebot.com/blog/free-api-whatsapp-messages/ to get your free API key.",
+            },
+            { status: 500 },
+          );
+        }
 
-    let order: Order;
-    try {
-      order = (await request.json()) as Order;
-    } catch {
-      return Response.json({ success: false, error: "Invalid request body" }, { status: 400 });
-    }
+        let order: Order;
+        try {
+          order = (await request.json()) as Order;
+        } catch {
+          return Response.json({ success: false, error: "Invalid request body" }, { status: 400 });
+        }
 
-    if (!order.id) {
-      return Response.json({ success: false, error: "Missing order ID" }, { status: 400 });
-    }
+        if (!order.id) {
+          return Response.json({ success: false, error: "Missing order ID" }, { status: 400 });
+        }
 
-    const message = buildWhatsAppMessage(order);
-    const encoded = encodeURIComponent(message);
-    const url = `https://api.callmebot.com/whatsapp.php?phone=${CALLMEBOT_PHONE}&text=${encoded}&apikey=${CALLMEBOT_APIKEY}`;
+        const message = buildWhatsAppMessage(order);
+        const encoded = encodeURIComponent(message);
+        const url = `https://api.callmebot.com/whatsapp.php?phone=${CALLMEBOT_PHONE}&text=${encoded}&apikey=${CALLMEBOT_APIKEY}`;
 
-    try {
-      const res = await fetch(url);
-      const body = await res.text();
+        try {
+          const res = await fetch(url);
+          const body = await res.text();
 
-      // CallMeBot returns plain text — success contains "Message queued"
-      if (!res.ok || body.toLowerCase().includes("error")) {
-        console.error("CallMeBot error:", body);
-        return Response.json({ success: false, error: body }, { status: 502 });
-      }
+          if (!res.ok || body.toLowerCase().includes("error")) {
+            console.error("CallMeBot error:", body);
+            return Response.json({ success: false, error: body }, { status: 502 });
+          }
 
-      return Response.json({ success: true });
-    } catch (err) {
-      console.error("WhatsApp send failed:", err);
-      return Response.json({ success: false, error: String(err) }, { status: 500 });
-    }
+          return Response.json({ success: true });
+        } catch (err) {
+          console.error("WhatsApp send failed:", err);
+          return Response.json({ success: false, error: String(err) }, { status: 500 });
+        }
+      },
+    },
   },
 });
