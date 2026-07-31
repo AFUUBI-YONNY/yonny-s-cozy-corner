@@ -96,6 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Yonny's Shop — Comfort Starts at Home" },
       { name: "twitter:title", content: "Yonny's Shop — Comfort Starts at Home" },
       { name: "description", content: "Shop premium slippers and quality bedding at affordable prices. Free delivery on qualifying orders." },
+      { name: "keywords", content: "yonnys, yonny's shop, slippers, bedding, bedsheets, duvets, blankets, indoor slippers, phone covers, caps, shirts, affordable prices, quality products" },
       { property: "og:description", content: "Shop premium slippers and quality bedding at affordable prices. Free delivery on qualifying orders." },
       { name: "twitter:description", content: "Shop premium slippers and quality bedding at affordable prices. Free delivery on qualifying orders." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ad8bebdd-c975-4279-af35-7df0f5d18aad/id-preview-ee5d3c41--28e932b0-ae24-4e0c-8436-4344b42459c4.lovable.app-1783221784149.png" },
@@ -103,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,
